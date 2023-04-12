@@ -1,16 +1,12 @@
 const { Recipe } = require("../db");
 
-const createRecipe = async ({
-  name,
-  image,
-  resume,
-  health_score,
-  instructions,
-}) => {
+const createRecipe = async (props) => {
+  const { name, image, summary, health_score, instructions } = props;
+
   const newRecipe = await Recipe.create({
     name,
     image,
-    resume,
+    summary,
     health_score,
     instructions,
   });
