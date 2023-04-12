@@ -7,7 +7,6 @@ const searchRecipeByName = require("../controllers/searchRecipeByName");
 const router = Router();
 
 router.get("/name", async (req, res) => {
-  console.log("RUTA NAME");
   try {
     const { search } = req.query;
     console.log(search);
