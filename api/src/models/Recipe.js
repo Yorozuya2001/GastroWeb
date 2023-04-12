@@ -26,7 +26,7 @@ module.exports = (sequelize) => {
       type: DataTypes.FLOAT,
       allowNull: false,
     },
-    instructions: {
+    analyzedInstructions: {
       type: DataTypes.TEXT,
       allowNull: false,
     },

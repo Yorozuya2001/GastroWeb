@@ -34,14 +34,16 @@ router.get("/:idRecipe", async (req, res) => {
 
 router.post("/", validateRecipe, async (req, res) => {
   try {
-    const { name, image, summary, health_score, instructions } = req.body;
+    const { name, image, summary, health_score, analyzedInstructions, diets } =
+      req.body;
 
     await createRecipe({
       name,
       image,
       summary,
       health_score,
-      instructions,
+      analyzedInstructions,
+      diets,
     });
     res.status(200).send("Receta creada correctamente.");
   } catch (error) {

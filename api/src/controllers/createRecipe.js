@@ -1,15 +1,28 @@
-const { Recipe } = require("../db");
+const { Recipe, Diets } = require("../db");
 
 const createRecipe = async (props) => {
-  const { name, image, summary, health_score, instructions } = props;
+  const { name, image, summary, health_score, analyzedInstructions, diets } =
+    props;
+
+  console.log(diets);
 
   const newRecipe = await Recipe.create({
     name,
     image,
     summary,
     health_score,
-    instructions,
+    analyzedInstructions,
   });
+
+  // Relacionamos las dietas con la receta creada
+  await Promise.all(
+    diets.map(async (diet) => {
+      const [newDiet, created] = await Diets.findOrCreate({
+        where: { name: diet.name },
+      });
+      await newRecipe.addDiet(newDiet);
+    })
+  );
 
   return newRecipe;
 };

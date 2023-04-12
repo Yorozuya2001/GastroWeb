@@ -1,18 +1,16 @@
 //Variables de entorno
 require("dotenv").config();
 const { API_KEY } = process.env;
-
 //API URL
 const API_URL = require("../../api-url");
-
 //Base de datos
 const { Recipe } = require("../db.js");
-
 //Sequelize
 const { Op } = require("sequelize");
-
 //Axios
 const axios = require("axios");
+//Helper
+const specifyResults = require("../helper/specifyResults");
 
 /**************** CONTROLADOR PARA "/name" ****************/
 
@@ -32,17 +30,7 @@ const searchRecipeByName = async (search) => {
       },
     });
 
-    let data_API = response_API.data.results.map((result) => {
-      return {
-        id: result.id,
-        title: result.title,
-        image: result.image,
-        summary: result.summary,
-        healthScore: result.healthScore,
-        instructions: result.instructions ? result.instructions : null,
-      };
-    });
-
+    let data_API = specifyResults(response_API.data.results);
     return [...data_API, ...response_DB];
   } catch (error) {
     throw new Error(

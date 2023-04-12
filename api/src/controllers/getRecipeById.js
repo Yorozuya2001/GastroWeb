@@ -2,10 +2,8 @@
 require("dotenv").config();
 const API_URL = require("../../api-url");
 const { API_KEY } = process.env;
-
 //Base de datos
 const { Recipe } = require("../db.js");
-
 //Libreria Axios
 const axios = require("axios");
 
@@ -24,10 +22,19 @@ const getRecipeById = async (idRecipe) => {
       `${API_URL}/recipes/${idRecipe}/information?apiKey=${API_KEY}`
     );
 
-    const { id, title, image, summary, healthScore, instructions } =
+    const { id, title, image, summary, healthScore, analyzedInstructions } =
       response.data;
 
-    return { id, title, image, summary, healthScore, instructions };
+    return {
+      id,
+      title,
+      image,
+      summary,
+      healthScore,
+      analyzedInstructions: analyzedInstructions[0]?.steps.map((recipeStep) => {
+        return recipeStep.step;
+      }),
+    };
   } catch (error) {
     throw new Error(
       `Error al obtener la receta con id ${idRecipe}: ${error.message}`
