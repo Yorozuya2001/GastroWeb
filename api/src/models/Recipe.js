@@ -25,6 +25,10 @@ module.exports = (sequelize) => {
     health_score: {
       type: DataTypes.FLOAT,
       allowNull: false,
+      validate: {
+        min: 0,
+        max: 100,
+      },
     },
     analyzedInstructions: {
       type: DataTypes.TEXT,

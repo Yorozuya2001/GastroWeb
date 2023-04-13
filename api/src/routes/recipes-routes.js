@@ -37,14 +37,17 @@ router.post("/", validateRecipe, async (req, res) => {
     const { name, image, summary, health_score, analyzedInstructions, diets } =
       req.body;
 
-    await createRecipe({
+    const reqData = {
       name,
       image,
       summary,
       health_score,
       analyzedInstructions,
       diets,
-    });
+    };
+
+    await createRecipe(reqData);
+
     res.status(200).send("Receta creada correctamente.");
   } catch (error) {
     res.status(400).json({ error: error.message });
