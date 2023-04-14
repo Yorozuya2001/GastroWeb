@@ -22,6 +22,7 @@ export const StyledInput = styled.input`
 
 export const StyledButton = styled.button`
   background-color: ${vars.color_1};
+  color: ${vars.color_5};
   border: none;
   height: 50px;
   padding: 8px 16px;

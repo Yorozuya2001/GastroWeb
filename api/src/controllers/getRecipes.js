@@ -20,6 +20,7 @@ const getRecipes = async () => {
       title: recipe.title,
       image: recipe.image,
       diets: recipe.diets,
+      healthScore: recipe.healthScore,
     };
   });
 

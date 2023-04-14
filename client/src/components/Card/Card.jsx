@@ -1,18 +1,29 @@
 import React from "react";
-import { StyledDiv, StyledDivImage, StyledImage } from "./Card-styles";
+import {
+  StyledDiv,
+  StyledDivImage,
+  StyledImage,
+  StyledH2,
+  StyledP,
+} from "./Card-styles";
 
-const Card = ({ title, image, diets }) => {
+const Card = ({ title, image, diets, healthScore }) => {
   return (
     <StyledDiv>
-      <h2>{title}</h2>
+      <StyledH2>{title}</StyledH2>
       <StyledDivImage>
         <StyledImage src={image} alt={title} />
       </StyledDivImage>
-      <ul>
-        {diets?.map((diet) => {
-          return <li>{diet}</li>;
-        })}
-      </ul>
+      <StyledP>
+        Diets:
+        <br />
+        {diets.join(", ")}
+      </StyledP>
+      <StyledP>
+        Health Score:
+        <br />
+        {healthScore}
+      </StyledP>
     </StyledDiv>
   );
 };

@@ -3,6 +3,7 @@ const vars = {
   color_2: "#62a949",
   color_3: "#000000",
   color_4: "#fbca63",
+  color_5: "#fff",
   text_size_h1: "5rem",
   text_size_principal: "2.25rem",
   text_size_secondary: "1.5rem",

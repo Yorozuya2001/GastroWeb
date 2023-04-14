@@ -12,8 +12,16 @@ const Cards = () => {
   return (
     <StyledDiv>
       {recipes[0] &&
-        recipes.map(({ id, title, image, diets }) => {
-          return <Card key={id} title={title} image={image} diets={diets} />;
+        recipes.map(({ id, title, image, diets, healthScore }) => {
+          return (
+            <Card
+              key={id}
+              title={title}
+              image={image}
+              diets={diets}
+              healthScore={healthScore}
+            />
+          );
         })}
     </StyledDiv>
   );
