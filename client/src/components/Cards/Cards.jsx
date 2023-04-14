@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import Card from "../Card/Card";
 import { StyledDiv } from "./Cards-styles";
+import { useDispatch, useSelector } from "react-redux";
+import { getRecipes } from "../../redux/actions";
 
 const Cards = () => {
-  const [recipes, setData] = useState([]);
+  const dispatch = useDispatch();
+  const recipes = useSelector((state) => state.recipes);
+
   useEffect(() => {
-    fetch("http://localhost:3001/recipes")
-      .then((res) => res.json())
-      .then((data) => setData([...data]));
+    dispatch(getRecipes());
   }, []);
   return (
     <StyledDiv>

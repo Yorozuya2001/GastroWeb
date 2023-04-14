@@ -19,6 +19,11 @@ export const StyledDiv = styled.div`
   &:hover {
     transform: translateY(-3px);
   }
+
+  h2,
+  p {
+    color: ${vars.color_3};
+  }
 `;
 
 export const StyledH2 = styled.h2`
