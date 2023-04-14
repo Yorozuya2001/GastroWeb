@@ -1,16 +1,16 @@
 import React from "react";
 
 import { NavLink } from "react-router-dom";
-import { StyledButton, StyledH1 } from "./LandingPage.-styles";
+import { StyledButton, StyledH1, StyledDiv } from "./LandingPage.-styles";
 
 const LandingPage = () => {
   return (
-    <div>
-      <StyledH1>Bienvenido a GastroWeb</StyledH1>
-      <NavLink>
-        <StyledButton>¡Vayamos a cocinar!</StyledButton>
+    <StyledDiv>
+      <StyledH1>Welcome to GastroWeb</StyledH1>
+      <NavLink to="/home">
+        <StyledButton>Start looking for recipes</StyledButton>
       </NavLink>
-    </div>
+    </StyledDiv>
   );
 };
 

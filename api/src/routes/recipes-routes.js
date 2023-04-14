@@ -4,6 +4,7 @@ const { Router } = require("express");
 const getRecipeById = require("../controllers/getRecipeById");
 const searchRecipeByName = require("../controllers/searchRecipeByName");
 const createRecipe = require("../controllers/createRecipe");
+const getRecipes = require("../controllers/getRecipes");
 
 //Middlewares
 const validateRecipe = require("../middlewares/validateRecipe");
@@ -11,6 +12,16 @@ const validateRecipe = require("../middlewares/validateRecipe");
 const router = Router();
 
 /**************** RECIPES ROUTES ****************/
+
+router.get("/", async (req, res) => {
+  console.log("llega aqui");
+  try {
+    const data = await getRecipes();
+    res.status(200).json(data);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 router.get("/name", async (req, res) => {
   try {
