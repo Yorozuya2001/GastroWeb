@@ -1,11 +1,14 @@
-import React from "react";
 import { StyledDiv, StyledInput, StyledButton } from "./SearchBar-styles";
 
-const SearchBar = () => {
+const SearchBar = ({ handleChange }) => {
   return (
     <StyledDiv>
-      <StyledInput type="text" placeholder="Potato and Tomato..." />
-      <StyledButton>Search Recipe</StyledButton>
+      <StyledInput
+        type="text"
+        onChange={handleChange}
+        placeholder="Potato and Tomato..."
+      />
+      <StyledButton type="submit">Search Recipe</StyledButton>
     </StyledDiv>
   );
 };

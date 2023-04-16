@@ -1,34 +1,24 @@
-import React, { useEffect } from "react";
 import { StyledDiv, StyledSelect } from "./FilterBar-styles";
 import DietsCheckbox from "./DietsCheckbox";
-import { useDispatch, useSelector } from "react-redux";
-import { getDiets } from "../../redux/actions";
 
-const FilterBar = () => {
-  const dispatch = useDispatch();
-  const diets = useSelector((state) => state.diets);
-  console.log(diets);
-
-  useEffect(() => {
-    dispatch(getDiets());
-  }, [diets]);
+const FilterBar = ({ diets, handleChangeOrder }) => {
   return (
     <>
       <StyledDiv>
-        <StyledSelect name="" id="">
-          <option value="">A - Z</option>
-          <option value="">Z - A</option>
-          <option value="">Lowest health score first</option>
-          <option value="">Highest health score first</option>
+        <StyledSelect name="order" id="order" onChange={handleChangeOrder}>
+          <option value="a-z">A - Z</option>
+          <option value="z-a">Z - A</option>
+          <option value="lowest-hs-first">Lowest health score first</option>
+          <option value="highest-hs-first">Highest health score first</option>
         </StyledSelect>
         <StyledSelect name="" id="">
-          <option value="">All Recipes</option>
-          <option value="">My Recipes</option>
+          <option value="all">All Recipes</option>
+          <option value="db-recipes">My Recipes</option>
         </StyledSelect>
       </StyledDiv>
       <div>
         {diets?.map((diet) => {
-          return <DietsCheckbox name={diet.name} />;
+          return <DietsCheckbox key={diet.id} name={diet.name} />;
         })}
       </div>
     </>

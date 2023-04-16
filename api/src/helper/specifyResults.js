@@ -6,6 +6,7 @@ const specifyResults = (results) => {
       image: result.image,
       summary: result.summary,
       healthScore: result.healthScore,
+      diets: result.diets,
       analyzedInstructions: result.analyzedInstructions[0]?.steps.map(
         (recipeStep) => {
           return recipeStep.step;

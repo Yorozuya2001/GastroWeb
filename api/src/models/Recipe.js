@@ -30,7 +30,7 @@ module.exports = (sequelize) => {
         max: 100,
       },
     },
-    analyzedInstructions: {
+    analyzed_Instructions: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
