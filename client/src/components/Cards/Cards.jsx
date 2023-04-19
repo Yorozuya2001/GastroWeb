@@ -9,8 +9,8 @@ const Cards = () => {
   const recipes = useSelector((state) => state.recipes);
 
   useEffect(() => {
-    dispatch(getRecipes());
-  }, []);
+    if (!recipes.length) dispatch(getRecipes());
+  }, [recipes]);
   return (
     <StyledDiv>
       {recipes[0] &&
@@ -18,6 +18,7 @@ const Cards = () => {
           return (
             <Card
               key={id}
+              id={id}
               title={title}
               image={image}
               diets={diets}

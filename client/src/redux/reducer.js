@@ -3,11 +3,15 @@ import {
   GET_DIETS,
   SEARCH_RECIPE,
   ORDER_RECIPES,
+  FILTER_RECIPES,
+  GET_RECIPE_BY_ID,
 } from "./actions";
 
 const initialState = {
   recipes: [],
   diets: [],
+  allRecipes: [],
+  recipeInfo: {},
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -16,16 +20,18 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         recipes: [...state.recipes, ...action.payload],
+        allRecipes: [...state.allRecipes, ...action.payload],
       };
     case GET_DIETS:
       return {
         ...state,
-        diets: [...state.diets, ...action.payload],
+        diets: [...action.payload],
       };
     case SEARCH_RECIPE:
       return {
         ...state,
         recipes: [...action.payload],
+        allRecipes: [...action.payload],
       };
     case ORDER_RECIPES:
       if (action.payload === "a-z") {
@@ -64,6 +70,30 @@ const rootReducer = (state = initialState, action) => {
         };
       }
       break;
+    case FILTER_RECIPES:
+      if (action.payload === "all") {
+        return {
+          ...state,
+          recipes: [...state.allRecipes],
+        };
+      }
+      if (action.payload === "db-recipes") {
+        return {
+          ...state,
+          recipes: [
+            ...state.allRecipes.filter(
+              (recipe) => typeof recipe.id !== "number"
+            ),
+          ],
+        };
+      }
+      break;
+    case GET_RECIPE_BY_ID:
+      return {
+        ...state,
+        recipeInfo: { ...action.payload },
+      };
+
     default:
       return state;
   }

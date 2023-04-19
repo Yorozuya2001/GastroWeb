@@ -30,8 +30,17 @@ const searchRecipeByName = async (search) => {
       },
     });
 
+    let data_DB = response_DB.map((Recipe) => {
+      let modifyObj = {
+        ...Recipe.dataValues,
+        title: Recipe.dataValues.name,
+      };
+      delete modifyObj.name;
+      return modifyObj;
+    });
+
     let data_API = specifyResults(response_API.data.results);
-    return [...data_API, ...response_DB];
+    return [...data_API, ...data_DB];
   } catch (error) {
     throw new Error(
       `Error al buscar la receta con el nombre ${search}: ${error.message}`

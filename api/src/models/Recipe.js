@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    health_score: {
+    healthScore: {
       type: DataTypes.FLOAT,
       allowNull: false,
       validate: {
@@ -30,7 +30,7 @@ module.exports = (sequelize) => {
         max: 100,
       },
     },
-    analyzed_Instructions: {
+    analyzedInstructions: {
       type: DataTypes.TEXT,
       allowNull: false,
     },

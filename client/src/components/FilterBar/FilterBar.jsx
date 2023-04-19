@@ -1,7 +1,7 @@
 import { StyledDiv, StyledSelect } from "./FilterBar-styles";
 import DietsCheckbox from "./DietsCheckbox";
 
-const FilterBar = ({ diets, handleChangeOrder }) => {
+const FilterBar = ({ diets, handleChangeOrder, handleChangeFilter }) => {
   return (
     <>
       <StyledDiv>
@@ -11,7 +11,7 @@ const FilterBar = ({ diets, handleChangeOrder }) => {
           <option value="lowest-hs-first">Lowest health score first</option>
           <option value="highest-hs-first">Highest health score first</option>
         </StyledSelect>
-        <StyledSelect name="" id="">
+        <StyledSelect name="" id="" onChange={handleChangeFilter}>
           <option value="all">All Recipes</option>
           <option value="db-recipes">My Recipes</option>
         </StyledSelect>

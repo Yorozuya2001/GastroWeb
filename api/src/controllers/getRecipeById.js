@@ -12,18 +12,37 @@ const axios = require("axios");
 const getRecipeById = async (idRecipe) => {
   try {
     let recipe = undefined;
+    let dietsOfRecipe = undefined;
 
     isNaN(Number(idRecipe)) &&
       (recipe = await Recipe.findOne({ where: { id: idRecipe } }));
 
-    if (recipe) return recipe;
+    if (recipe) {
+      const diets = await recipe.getDiets();
+
+      dietsOfRecipe = diets.map((diet) => diet.name);
+
+      return {
+        ...recipe.dataValues,
+        diets: dietsOfRecipe[0] ? dietsOfRecipe.join(" - ") : "",
+      };
+    }
 
     const response = await axios.get(
       `${API_URL}/recipes/${idRecipe}/information?apiKey=${API_KEY}`
     );
 
-    const { id, title, image, summary, healthScore, analyzedInstructions } =
-      response.data;
+    console.log(response.data);
+
+    const {
+      id,
+      title,
+      image,
+      summary,
+      healthScore,
+      analyzedInstructions,
+      diets,
+    } = response.data;
 
     return {
       id,
@@ -31,9 +50,12 @@ const getRecipeById = async (idRecipe) => {
       image,
       summary,
       healthScore,
-      analyzedInstructions: analyzedInstructions[0]?.steps.map((recipeStep) => {
-        return recipeStep.step;
-      }),
+      diets: diets[0] ? diets.join(" - ") : "",
+      analyzedInstructions: analyzedInstructions[0]?.steps
+        .map((recipeStep) => {
+          return recipeStep.step;
+        })
+        .join(" "),
     };
   } catch (error) {
     throw new Error(

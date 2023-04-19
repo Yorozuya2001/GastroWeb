@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import {
   StyledDiv,
   StyledDivImage,
@@ -7,7 +8,8 @@ import {
   StyledP,
 } from "./Card-styles";
 
-const Card = ({ title, image, diets, healthScore }) => {
+const Card = ({ id, title, image, diets, healthScore }) => {
+  console.log({ id, title, image, diets, healthScore });
   return (
     <StyledDiv>
       <StyledH2>{title}</StyledH2>
@@ -17,13 +19,17 @@ const Card = ({ title, image, diets, healthScore }) => {
       <StyledP>
         Diets:
         <br />
-        {diets.join(", ")}
+        {diets}
       </StyledP>
       <StyledP>
         Health Score:
         <br />
         {healthScore}
       </StyledP>
+      <NavLink to={`/detail/${id}`}>
+        {" "}
+        <button>View More Info</button>
+      </NavLink>
     </StyledDiv>
   );
 };

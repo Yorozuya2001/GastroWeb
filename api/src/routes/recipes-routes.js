@@ -45,23 +45,23 @@ router.get("/:idRecipe", async (req, res) => {
 
 router.post("/", validateRecipe, async (req, res) => {
   try {
-    const { name, image, summary, health_score, analyzedInstructions, diets } =
+    const { name, image, summary, healthScore, analyzedInstructions, diets } =
       req.body;
 
     const reqData = {
       name,
       image,
       summary,
-      health_score,
+      healthScore,
       analyzedInstructions,
       diets,
     };
 
     await createRecipe(reqData);
 
-    res.status(200).send("Receta creada correctamente.");
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(200).json({ message: "Receta creada correctamente." });
+  } catch (err) {
+    res.status(400).json(err);
   }
 });
 
