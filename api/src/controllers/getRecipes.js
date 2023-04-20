@@ -12,19 +12,24 @@ const axios = require("axios");
 /**************** CONTROLADOR PARA "/recipe" ****************/
 
 const getRecipes = async () => {
+  /**************** PETICIÓN A LA BASE DE DATOS ****************/
+
   let data_DB = undefined;
   const response_DB = await Recipe.findAll();
 
-  data_DB = response_DB.map((Recipe) => {
+  data_DB = response_DB.map(async (Recipe) => {
     let modifyObj = {
       ...Recipe.dataValues,
       title: Recipe.dataValues.name,
+      diets: (await Recipe.getDiets()).map((diet) => diet.name).join(" - "),
     };
     delete modifyObj.name;
     return modifyObj;
   });
 
-  console.log(data_DB[0]);
+  data_DB = await Promise.all(data_DB);
+
+  /**************** PETICIÓN A LA API DE SPOONACULAR ****************/
 
   const response = await axios.get(
     `${API_URL}/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`

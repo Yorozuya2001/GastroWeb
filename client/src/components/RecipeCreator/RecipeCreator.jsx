@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DietsCheckbox from "./DietsCheckbox";
 import { useSelector } from "react-redux";
 import {
@@ -16,6 +16,7 @@ import validateRecipe from "./validateRecipe";
 
 const RecipeCreator = () => {
   const diets = useSelector((state) => state.diets);
+  const [boolean, setBoolean] = useState(true);
   const [myRecipe, setMyRecipe] = useState({
     name: "",
     summary: "",
@@ -32,6 +33,21 @@ const RecipeCreator = () => {
     image: "Completa la url de las imagenes",
   });
 
+  const EnableOrDisabledButton = () => {
+    let arrOfErrors = Object.values(errors);
+    console.log(arrOfErrors);
+    let arrOfErrorsFiltered = arrOfErrors.filter((error) => error === "");
+    console.log("Filtrado");
+    console.log(arrOfErrorsFiltered);
+
+    if (arrOfErrorsFiltered.length === arrOfErrors.length) {
+      console.log("pasamos por true");
+      setBoolean(false);
+    } else {
+      setBoolean(true);
+    }
+  };
+
   const handleChange = (event) => {
     const value = event.target.value;
     const name = event.target.name;
@@ -46,6 +62,9 @@ const RecipeCreator = () => {
     );
   };
 
+  useEffect(() => {
+    EnableOrDisabledButton();
+  }, [errors]);
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -160,7 +179,9 @@ const RecipeCreator = () => {
           <StyledP>{errors.analyzedInstructions}</StyledP>
         )}
         <StyledDivButtonContainer>
-          <StyledButton type="submit">Create recipe</StyledButton>
+          <StyledButton type="submit" disabled={boolean}>
+            Create recipe
+          </StyledButton>
         </StyledDivButtonContainer>
       </StyledForm>
     </StyledDivContainerForm>

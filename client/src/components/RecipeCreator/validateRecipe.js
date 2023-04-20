@@ -16,9 +16,7 @@ const validateRecipe = (recipe) => {
   if (!recipe.summary) errors.summary = "Se requiere un summary";
 
   if (
-    !(
-      parseInt(recipe.healthScore) >= 0 && parseInt(recipe.healthScore) <= 100
-    ) ||
+    !(Number(recipe.healthScore) >= 0 && Number(recipe.healthScore) <= 100) ||
     recipe.healthScore === ""
   )
     errors.healthScore = "Puntuación invalida";

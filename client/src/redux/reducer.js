@@ -5,6 +5,7 @@ import {
   ORDER_RECIPES,
   FILTER_RECIPES,
   GET_RECIPE_BY_ID,
+  CLEAR_DETAIL,
 } from "./actions";
 
 const initialState = {
@@ -93,7 +94,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         recipeInfo: { ...action.payload },
       };
-
+    case CLEAR_DETAIL:
+      return {
+        ...state,
+        recipeInfo: {},
+      };
     default:
       return state;
   }

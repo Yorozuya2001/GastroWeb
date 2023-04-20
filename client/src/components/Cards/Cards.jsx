@@ -3,6 +3,7 @@ import Card from "../Card/Card";
 import { StyledDiv } from "./Cards-styles";
 import { useDispatch, useSelector } from "react-redux";
 import { getRecipes } from "../../redux/actions";
+import Loader from "../Loader/Loader";
 
 const Cards = () => {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const Cards = () => {
   }, [recipes]);
   return (
     <StyledDiv>
-      {recipes[0] &&
+      {recipes[0] ? (
         recipes.map(({ id, title, image, diets, healthScore }) => {
           return (
             <Card
@@ -25,7 +26,10 @@ const Cards = () => {
               healthScore={healthScore}
             />
           );
-        })}
+        })
+      ) : (
+        <Loader />
+      )}
     </StyledDiv>
   );
 };

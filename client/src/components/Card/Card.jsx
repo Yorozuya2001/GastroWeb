@@ -6,10 +6,10 @@ import {
   StyledImage,
   StyledH2,
   StyledP,
+  StyledButton,
 } from "./Card-styles";
 
 const Card = ({ id, title, image, diets, healthScore }) => {
-  console.log({ id, title, image, diets, healthScore });
   return (
     <StyledDiv>
       <StyledH2>{title}</StyledH2>
@@ -28,7 +28,7 @@ const Card = ({ id, title, image, diets, healthScore }) => {
       </StyledP>
       <NavLink to={`/detail/${id}`}>
         {" "}
-        <button>View More Info</button>
+        <StyledButton>View More Info</StyledButton>
       </NavLink>
     </StyledDiv>
   );

@@ -12,7 +12,7 @@ export const StyledDiv = styled.div`
   margin: 16px;
 
   width: 460px;
-  height: auto;
+  height: 610px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
   transition: transform 0.2s ease-in-out;
 
@@ -48,4 +48,19 @@ export const StyledP = styled.p`
   text-align: center;
   font-size: ${vars.text_size_seccion};
   margin: 16px;
+`;
+
+export const StyledButton = styled.button`
+  padding: 16px;
+  background-color: ${vars.color_1};
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  margin: 12px 0;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: ${vars.color_2};
+  }
 `;

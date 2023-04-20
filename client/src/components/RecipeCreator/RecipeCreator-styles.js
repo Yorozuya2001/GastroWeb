@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import vars from "../styledComponents-variables";
 
 export const StyledInput = styled.input`
@@ -75,16 +75,21 @@ export const StyledButton = styled.button`
   width: 50%;
   border: none;
   background-color: ${vars.color_1};
+  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
   font-size: ${vars.text_size_seccion};
   text-align: center;
   padding: 8px;
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? "default" : "pointer")};
   color: white;
   transition: all 0.3s ease-in-out;
 
-  &:hover {
-    background-color: ${vars.color_2};
-  }
+  ${(props) =>
+    !props.disabled &&
+    css`
+      &:hover {
+        background-color: ${vars.color_2};
+      }
+    `}
 `;
 
 export const StyledDivContainsCheck = styled.div`

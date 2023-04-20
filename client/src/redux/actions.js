@@ -4,6 +4,7 @@ export const SEARCH_RECIPE = "SEARCH_RECIPE";
 export const ORDER_RECIPES = "ORDER_RECIPES";
 export const FILTER_RECIPES = "FILTER_RECIPES";
 export const GET_RECIPE_BY_ID = "GET_RECIPE_BY_ID";
+export const CLEAR_DETAIL = "CLEAR_DETAIL";
 
 export const getRecipes = () => {
   return async (dispatch) => {
@@ -82,5 +83,12 @@ export const getRecipeById = (id) => {
     } catch (error) {
       console.log(error);
     }
+  };
+};
+
+export const clearDetail = () => {
+  return {
+    type: CLEAR_DETAIL,
+    payload: null,
   };
 };
