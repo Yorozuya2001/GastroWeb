@@ -20,8 +20,8 @@ const rootReducer = (state = initialState, action) => {
     case GET_RECIPES:
       return {
         ...state,
-        recipes: [...state.recipes, ...action.payload],
-        allRecipes: [...state.allRecipes, ...action.payload],
+        recipes: [...action.payload],
+        allRecipes: [...action.payload],
       };
     case GET_DIETS:
       return {
@@ -70,6 +70,7 @@ const rootReducer = (state = initialState, action) => {
           ),
         };
       }
+
       break;
     case FILTER_RECIPES:
       if (action.payload === "all") {
@@ -88,7 +89,19 @@ const rootReducer = (state = initialState, action) => {
           ],
         };
       }
+
+      if (action.payload !== "allDiets") {
+        return {
+          ...state,
+          recipes: [
+            ...state.allRecipes.filter((recipe) =>
+              recipe.diets.includes(action.payload)
+            ),
+          ],
+        };
+      }
       break;
+
     case GET_RECIPE_BY_ID:
       return {
         ...state,

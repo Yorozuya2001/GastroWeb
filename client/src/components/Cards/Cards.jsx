@@ -1,36 +1,80 @@
-import { useEffect, useState } from "react";
+/* Componentes de React */
 import Card from "../Card/Card";
-import { StyledDiv } from "./Cards-styles";
-import { useDispatch, useSelector } from "react-redux";
-import { getRecipes } from "../../redux/actions";
 import Loader from "../Loader/Loader";
+import Pagination from "../Pagination/Pagination";
+import usePagination from "../../customHooks/usePagination";
+
+/* Componentes estilizados */
+import {
+  StyledButton,
+  StyledDiv,
+  StyledPaginationContainer,
+} from "./Cards-styles";
 
 const Cards = () => {
-  const dispatch = useDispatch();
-  const recipes = useSelector((state) => state.recipes);
-
-  useEffect(() => {
-    if (!recipes.length) dispatch(getRecipes());
-  }, [recipes]);
+  const [
+    pageNumbers,
+    currentPage,
+    setCurrentPage,
+    recipesViews,
+    handleNext,
+    handlePrev,
+  ] = usePagination();
   return (
-    <StyledDiv>
-      {recipes[0] ? (
-        recipes.map(({ id, title, image, diets, healthScore }) => {
-          return (
-            <Card
-              key={id}
-              id={id}
-              title={title}
-              image={image}
-              diets={diets}
-              healthScore={healthScore}
-            />
-          );
-        })
-      ) : (
-        <Loader />
-      )}
-    </StyledDiv>
+    <>
+      <StyledDiv>
+        {recipesViews[0] ? (
+          recipesViews.map(({ id, title, image, diets, healthScore }) => {
+            return (
+              <Card
+                key={id}
+                id={id}
+                title={title}
+                image={image}
+                diets={diets}
+                healthScore={healthScore}
+              />
+            );
+          })
+        ) : (
+          <Loader />
+        )}
+      </StyledDiv>
+      {/*--------------- Sección de paginación --------------- */}
+      <StyledPaginationContainer>
+        <StyledButton
+          onClick={handlePrev}
+          disabled={
+            currentPage ===
+            pageNumbers[0] /*Desabilitamos el botón si estamos en la primera pagina  */
+          }
+        >
+          Prev
+        </StyledButton>
+        <div>
+          {pageNumbers[0] &&
+            pageNumbers.map((number) => (
+              <Pagination
+                key={number}
+                number={number}
+                setCurrentPage={setCurrentPage}
+                disabled={pageNumbers.length === 1 ? true : false}
+              />
+            ))}
+        </div>
+        <StyledButton
+          onClick={handleNext}
+          disabled={
+            currentPage ===
+            pageNumbers[
+              pageNumbers.length - 1
+            ] /*Desabilitamos el botón si estamos en la última pagina  */
+          }
+        >
+          Next
+        </StyledButton>
+      </StyledPaginationContainer>
+    </>
   );
 };
 

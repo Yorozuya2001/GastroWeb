@@ -19,7 +19,7 @@ const searchRecipeByName = async (search) => {
     if (!search) throw new Error("No se ingreso un valor a buscar");
 
     const response_API = await axios.get(
-      `${API_URL}/recipes/complexSearch?apiKey=${API_KEY}&query=${search}&addRecipeInformation=true`
+      `${API_URL}/recipes/complexSearch?apiKey=${API_KEY}&query=${search}&addRecipeInformation=true&number=100`
     );
 
     const response_DB = await Recipe.findAll({

@@ -25,7 +25,7 @@ const CardDetail = () => {
 
   return (
     <StyledDivContainer>
-      {Object.keys(recipeInfo).length !== 0 ? (
+      {Object.keys(recipeInfo).length !== 0 && recipeInfo.image ? (
         <>
           <StyledNavLink to="/home">Volver</StyledNavLink>
           <StyledDivDetail>

@@ -1,6 +1,7 @@
-import React from "react";
-
+/* NavLink para enrutado */
 import { NavLink } from "react-router-dom";
+
+/* Componentes Estilizados */
 import { StyledButton, StyledH1, StyledDiv } from "./LandingPage.-styles";
 
 const LandingPage = () => {

@@ -1,7 +1,9 @@
-import SearchBar from "../SearchBar/SearchBar";
-import { StyledDiv } from "./Home-styles";
+/* Componentes de React */
 import Cards from "../Cards/Cards";
 import CardsForm from "../CardsForm/CardsForm";
+
+/* Componentes estilizados */
+import { StyledDiv } from "./Home-styles";
 
 const Home = () => {
   return (

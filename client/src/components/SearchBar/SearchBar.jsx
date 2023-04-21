@@ -1,3 +1,4 @@
+/* Componentes estilizados */
 import { StyledDiv, StyledInput, StyledButton } from "./SearchBar-styles";
 
 const SearchBar = ({ handleChange }) => {
@@ -6,7 +7,7 @@ const SearchBar = ({ handleChange }) => {
       <StyledInput
         type="text"
         onChange={handleChange}
-        placeholder="Potato and Tomato..."
+        placeholder={`There are over a million recipes to look up, type something like "Oreo"...`}
       />
       <StyledButton type="submit">Search Recipe</StyledButton>
     </StyledDiv>
