@@ -5,6 +5,7 @@ export const ORDER_RECIPES = "ORDER_RECIPES";
 export const FILTER_RECIPES = "FILTER_RECIPES";
 export const GET_RECIPE_BY_ID = "GET_RECIPE_BY_ID";
 export const CLEAR_DETAIL = "CLEAR_DETAIL";
+export const FILTER_RECIPES_BY_DIETS = "FILTER_RECIPES_BY_DIETS";
 
 export const getRecipes = () => {
   return async (dispatch) => {
@@ -66,6 +67,13 @@ export const orderBy = (value) => {
 export const filterBy = (value) => {
   return {
     type: FILTER_RECIPES,
+    payload: value,
+  };
+};
+
+export const filterByDiets = (value) => {
+  return {
+    type: FILTER_RECIPES_BY_DIETS,
     payload: value,
   };
 };

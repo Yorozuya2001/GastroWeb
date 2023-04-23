@@ -5,7 +5,12 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 /* Actions de Redux */
-import { filterBy, orderBy, searchRecipes } from "../redux/actions";
+import {
+  filterBy,
+  filterByDiets,
+  orderBy,
+  searchRecipes,
+} from "../redux/actions";
 import { getDiets } from "../redux/actions";
 
 const useOptions = () => {
@@ -38,6 +43,10 @@ const useOptions = () => {
     dispatch(filterBy(event.target.value));
   };
 
+  const handleChangefilterByDiets = (event) => {
+    dispatch(filterByDiets(event.target.value));
+  };
+
   /* despachamos la acción searchRecipes que buscará la recetas que contengan lo que se ingreso por input y prevenimos que se haga refresh, evaluamos, si el input vino vacio entonces no hacemos nada.*/
   const onSearch = (event) => {
     event.preventDefault();
@@ -46,7 +55,14 @@ const useOptions = () => {
     }
   };
 
-  return [diets, handleChange, handleChangeOrder, handleChangeFilter, onSearch];
+  return [
+    diets,
+    handleChange,
+    handleChangeOrder,
+    handleChangeFilter,
+    handleChangefilterByDiets,
+    onSearch,
+  ];
 };
 
 export default useOptions;

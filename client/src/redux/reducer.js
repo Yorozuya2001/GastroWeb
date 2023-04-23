@@ -5,6 +5,7 @@ import {
   SEARCH_RECIPE,
   ORDER_RECIPES,
   FILTER_RECIPES,
+  FILTER_RECIPES_BY_DIETS,
   GET_RECIPE_BY_ID,
   CLEAR_DETAIL,
 } from "./actions";
@@ -17,12 +18,14 @@ import { getRecipeByIdReducer } from "../helpers/redux-helpers/getRecipeByIdRedu
 import { getRecipesReducer } from "../helpers/redux-helpers/getRecipesReducer";
 import { orderRecipesReducer } from "../helpers/redux-helpers/orderRecipesReducer";
 import { searchRecipesReducer } from "../helpers/redux-helpers/searchRecipeReducer";
+import { filterByDietsReducer } from "../helpers/redux-helpers/filterByDietsReducer";
 
 /* Estado global de redux */
 const initialState = {
   recipes: [],
   diets: [],
   allRecipes: [],
+  recipesFiltered: [],
   recipeInfo: {},
 };
 
@@ -39,6 +42,9 @@ const rootReducer = (state = initialState, action) => {
       return orderRecipesReducer(state, action);
     case FILTER_RECIPES:
       return filterRecipesReducer(state, action);
+    case FILTER_RECIPES_BY_DIETS:
+      console.log(action.payload);
+      return filterByDietsReducer(state, action);
     case GET_RECIPE_BY_ID:
       return getRecipeByIdReducer(state, action);
     case CLEAR_DETAIL:

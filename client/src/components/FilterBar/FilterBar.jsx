@@ -1,7 +1,12 @@
 /* Componentes estilizados */
 import { StyledDiv, StyledSelect } from "./FilterBar-styles";
 
-const FilterBar = ({ diets, handleChangeOrder, handleChangeFilter }) => {
+const FilterBar = ({
+  diets,
+  handleChangeOrder,
+  handleChangeFilter,
+  handleChangefilterByDiets,
+}) => {
   return (
     <>
       <StyledDiv>
@@ -18,7 +23,7 @@ const FilterBar = ({ diets, handleChangeOrder, handleChangeFilter }) => {
           <option value="db-recipes">My Recipes</option>
         </StyledSelect>
         {/*------------------- Selector de Filtros por Dieta ------------------- */}
-        <StyledSelect name="" id="" onChange={handleChangeFilter}>
+        <StyledSelect name="" id="" onChange={handleChangefilterByDiets}>
           <option value="allDiets">All diets</option>
           {diets.map(({ name }) => {
             let capitalizeName = name.charAt(0).toUpperCase() + name.slice(1);

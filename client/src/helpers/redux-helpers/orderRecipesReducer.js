@@ -5,6 +5,12 @@ export const orderRecipesReducer = (state, action) => {
       recipes: [...state.recipes].sort((a, b) =>
         a.title.localeCompare(b.title)
       ),
+      allRecipes: [...state.allRecipes].sort((a, b) =>
+        a.title.localeCompare(b.title)
+      ),
+      recipesFiltered: [...state.recipesFiltered].sort((a, b) =>
+        a.title.localeCompare(b.title)
+      ),
     };
   }
 
@@ -14,6 +20,12 @@ export const orderRecipesReducer = (state, action) => {
       recipes: [...state.recipes].sort((a, b) =>
         b.title.localeCompare(a.title)
       ),
+      allRecipes: [...state.allRecipes].sort((a, b) =>
+        b.title.localeCompare(a.title)
+      ),
+      recipesFiltered: [...state.recipesFiltered].sort((a, b) =>
+        b.title.localeCompare(a.title)
+      ),
     };
   }
 
@@ -21,6 +33,12 @@ export const orderRecipesReducer = (state, action) => {
     return {
       ...state,
       recipes: [...state.recipes].sort((a, b) => a.healthScore - b.healthScore),
+      allRecipes: [...state.allRecipes].sort(
+        (a, b) => a.healthScore - b.healthScore
+      ),
+      recipesFiltered: [...state.recipesFiltered].sort(
+        (a, b) => a.healthScore - b.healthScore
+      ),
     };
   }
 
@@ -28,6 +46,12 @@ export const orderRecipesReducer = (state, action) => {
     return {
       ...state,
       recipes: [...state.recipes].sort((a, b) => b.healthScore - a.healthScore),
+      allRecipes: [...state.allRecipes].sort(
+        (a, b) => b.healthScore - a.healthScore
+      ),
+      recipesFiltered: [...state.recipesFiltered].sort(
+        (a, b) => b.healthScore - a.healthScore
+      ),
     };
   }
 };

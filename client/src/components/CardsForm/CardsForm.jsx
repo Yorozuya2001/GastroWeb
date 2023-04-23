@@ -6,8 +6,14 @@ import FilterBar from "../FilterBar/FilterBar";
 import useOptions from "../../customHooks/useOptions";
 
 const CardsForm = () => {
-  const [diets, handleChange, handleChangeOrder, handleChangeFilter, onSearch] =
-    useOptions();
+  const [
+    diets,
+    handleChange,
+    handleChangeOrder,
+    handleChangeFilter,
+    handleChangefilterByDiets,
+    onSearch,
+  ] = useOptions();
 
   return (
     <form onSubmit={onSearch}>
@@ -17,6 +23,7 @@ const CardsForm = () => {
         diets={diets}
         handleChangeOrder={handleChangeOrder}
         handleChangeFilter={handleChangeFilter}
+        handleChangefilterByDiets={handleChangefilterByDiets}
       />
     </form>
   );
