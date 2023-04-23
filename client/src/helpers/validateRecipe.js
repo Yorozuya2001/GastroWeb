@@ -1,3 +1,4 @@
+/* Expresión regular para validar url de imágenes */
 const regexUrl =
   /^https?:\/\/(?:[a-z\-]+\.)+[a-z]{2,}(?:\/[^\/\s]+)*\/(?:[^\/\s]+\.(?:jpg|jpeg|png))$/i;
 const validateRecipe = (recipe) => {

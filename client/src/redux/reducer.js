@@ -1,3 +1,4 @@
+/* Redux actions */
 import {
   GET_RECIPES,
   GET_DIETS,
@@ -8,6 +9,16 @@ import {
   CLEAR_DETAIL,
 } from "./actions";
 
+/* Redux reducers helpers */
+import { clearDetailReducer } from "../helpers/redux-helpers/clearDetailReducer";
+import { filterRecipesReducer } from "../helpers/redux-helpers/filterRecipesReducer";
+import { getDietsReducer } from "../helpers/redux-helpers/getDietsReducer";
+import { getRecipeByIdReducer } from "../helpers/redux-helpers/getRecipeByIdReducer";
+import { getRecipesReducer } from "../helpers/redux-helpers/getRecipesReducer";
+import { orderRecipesReducer } from "../helpers/redux-helpers/orderRecipesReducer";
+import { searchRecipesReducer } from "../helpers/redux-helpers/searchRecipeReducer";
+
+/* Estado global de redux */
 const initialState = {
   recipes: [],
   diets: [],
@@ -15,103 +26,23 @@ const initialState = {
   recipeInfo: {},
 };
 
+/* Reducer */
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_RECIPES:
-      return {
-        ...state,
-        recipes: [...action.payload],
-        allRecipes: [...action.payload],
-      };
+      return getRecipesReducer(state, action);
     case GET_DIETS:
-      return {
-        ...state,
-        diets: [...action.payload],
-      };
+      return getDietsReducer(state, action);
     case SEARCH_RECIPE:
-      return {
-        ...state,
-        recipes: [...action.payload],
-        allRecipes: [...action.payload],
-      };
+      return searchRecipesReducer(state, action);
     case ORDER_RECIPES:
-      if (action.payload === "a-z") {
-        return {
-          ...state,
-          recipes: [...state.recipes].sort((a, b) =>
-            a.title.localeCompare(b.title)
-          ),
-        };
-      }
-
-      if (action.payload === "z-a") {
-        return {
-          ...state,
-          recipes: [...state.recipes].sort((a, b) =>
-            b.title.localeCompare(a.title)
-          ),
-        };
-      }
-
-      if (action.payload === "lowest-hs-first") {
-        return {
-          ...state,
-          recipes: [...state.recipes].sort(
-            (a, b) => a.healthScore - b.healthScore
-          ),
-        };
-      }
-
-      if (action.payload === "highest-hs-first") {
-        return {
-          ...state,
-          recipes: [...state.recipes].sort(
-            (a, b) => b.healthScore - a.healthScore
-          ),
-        };
-      }
-
-      break;
+      return orderRecipesReducer(state, action);
     case FILTER_RECIPES:
-      if (action.payload === "all") {
-        return {
-          ...state,
-          recipes: [...state.allRecipes],
-        };
-      }
-      if (action.payload === "db-recipes") {
-        return {
-          ...state,
-          recipes: [
-            ...state.allRecipes.filter(
-              (recipe) => typeof recipe.id !== "number"
-            ),
-          ],
-        };
-      }
-
-      if (action.payload !== "allDiets") {
-        return {
-          ...state,
-          recipes: [
-            ...state.allRecipes.filter((recipe) =>
-              recipe.diets.includes(action.payload)
-            ),
-          ],
-        };
-      }
-      break;
-
+      return filterRecipesReducer(state, action);
     case GET_RECIPE_BY_ID:
-      return {
-        ...state,
-        recipeInfo: { ...action.payload },
-      };
+      return getRecipeByIdReducer(state, action);
     case CLEAR_DETAIL:
-      return {
-        ...state,
-        recipeInfo: {},
-      };
+      return clearDetailReducer(state, action);
     default:
       return state;
   }

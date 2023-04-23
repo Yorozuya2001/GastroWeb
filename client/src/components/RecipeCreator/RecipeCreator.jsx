@@ -1,6 +1,10 @@
-import { useEffect, useState } from "react";
+/* Custom hook */
+import useRecipeCreator from "../../customHooks/useRecipeCreator";
+
+/* Componente de React */
 import DietsCheckbox from "./DietsCheckbox";
-import { useSelector } from "react-redux";
+
+/* Componentes estilizados */
 import {
   StyledInput,
   StyledDivContainerForm,
@@ -12,94 +16,28 @@ import {
   StyledButton,
   StyledP,
 } from "./RecipeCreator-styles";
-import validateRecipe from "./validateRecipe";
 
 const RecipeCreator = () => {
-  const diets = useSelector((state) => state.diets);
-  const [boolean, setBoolean] = useState(true);
-  const [myRecipe, setMyRecipe] = useState({
-    name: "",
-    summary: "",
-    healthScore: "",
-    analyzedInstructions: "",
-    image: "",
-    diets: [],
-  });
-  const [errors, setErrors] = useState({
-    name: "Completa el campo nombre",
-    summary: "Completa el campo summary",
-    healthScore: "Complete tu puntuacion",
-    analyzedInstructions: "Completa las instrucciones",
-    image: "Completa la url de las imagenes",
-  });
-
-  const EnableOrDisabledButton = () => {
-    let arrOfErrors = Object.values(errors);
-    console.log(arrOfErrors);
-    let arrOfErrorsFiltered = arrOfErrors.filter((error) => error === "");
-    console.log("Filtrado");
-    console.log(arrOfErrorsFiltered);
-
-    if (arrOfErrorsFiltered.length === arrOfErrors.length) {
-      console.log("pasamos por true");
-      setBoolean(false);
-    } else {
-      setBoolean(true);
-    }
-  };
-
-  const handleChange = (event) => {
-    const value = event.target.value;
-    const name = event.target.name;
-
-    setMyRecipe({ ...myRecipe, [name]: value });
-
-    setErrors(
-      validateRecipe({
-        ...myRecipe,
-        [event.target.name]: event.target.value,
-      })
-    );
-  };
-
-  useEffect(() => {
-    EnableOrDisabledButton();
-  }, [errors]);
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    console.log(myRecipe);
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(myRecipe),
-    };
-
-    fetch("http://localhost:3001/recipes", options)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Error al enviar los datos al servidor");
-        }
-      })
-      .then((responseData) => {
-        console.log("Datos enviados correctamente:", responseData);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+  const [
+    diets,
+    myRecipe,
+    setMyRecipe,
+    boolean,
+    errors,
+    setErrors,
+    handleChange,
+    handleSubmit,
+  ] = useRecipeCreator();
 
   return (
     <StyledDivContainerForm>
-      <StyledForm action="" onSubmit={handleSubmit}>
+      <StyledForm action="" onSubmit={(event) => handleSubmit(event, myRecipe)}>
         <StyledDiv>
           <StyledLabel
             htmlFor="name"
-            onChange={handleChange}
+            onChange={(event) =>
+              handleChange(event, setMyRecipe, myRecipe, setErrors)
+            }
             value={myRecipe.name}
           >
             Name of recipe* :
@@ -107,7 +45,9 @@ const RecipeCreator = () => {
           <StyledInput
             type="text"
             name="name"
-            onChange={handleChange}
+            onChange={(event) =>
+              handleChange(event, setMyRecipe, myRecipe, setErrors)
+            }
             isCorrect={errors.name ? true : false}
             value={myRecipe.name}
           />
@@ -117,7 +57,9 @@ const RecipeCreator = () => {
           <StyledInput
             type="text"
             name="summary"
-            onChange={handleChange}
+            onChange={(event) =>
+              handleChange(event, setMyRecipe, myRecipe, setErrors)
+            }
             isCorrect={errors.summary ? true : false}
             value={myRecipe.summary}
           />
@@ -129,7 +71,9 @@ const RecipeCreator = () => {
           <StyledInput
             type="text"
             name="healthScore"
-            onChange={handleChange}
+            onChange={(event) =>
+              handleChange(event, setMyRecipe, myRecipe, setErrors)
+            }
             isCorrect={errors.healthScore ? true : false}
             value={myRecipe.healthScore}
           />
@@ -139,7 +83,9 @@ const RecipeCreator = () => {
           <StyledInput
             type="text"
             name="analyzedInstructions"
-            onChange={handleChange}
+            onChange={(event) =>
+              handleChange(event, setMyRecipe, myRecipe, setErrors)
+            }
             isCorrect={errors.analyzedInstructions ? true : false}
             value={myRecipe.analyzedInstructions}
           />
@@ -155,7 +101,9 @@ const RecipeCreator = () => {
             placeholder="https://www.example.com/image.png"
             value={myRecipe.image}
             isCorrect={errors.image ? true : false}
-            onChange={handleChange}
+            onChange={(event) =>
+              handleChange(event, setMyRecipe, myRecipe, setErrors)
+            }
           />
         </StyledDiv>
         <StyledLabel htmlFor="name">Select types of diets :</StyledLabel>

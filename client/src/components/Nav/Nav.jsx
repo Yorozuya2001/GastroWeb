@@ -1,4 +1,4 @@
-import React from "react";
+/* Componentes estilizados */
 import { NavStyle, StyledNavLink, NavHeader } from "./Nav-styles";
 
 const Nav = () => {

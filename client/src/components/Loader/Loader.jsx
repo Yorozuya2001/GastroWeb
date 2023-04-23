@@ -1,4 +1,3 @@
-import React from "react";
 import { StyledSpan } from "./Loader-styles";
 
 const Loader = () => {

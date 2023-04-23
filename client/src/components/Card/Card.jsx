@@ -1,5 +1,7 @@
-import React from "react";
+/* React Router Dom */
 import { NavLink } from "react-router-dom";
+
+/* Componentes Estilizados */
 import {
   StyledDiv,
   StyledDivImage,
@@ -27,7 +29,6 @@ const Card = ({ id, title, image, diets, healthScore }) => {
         {healthScore}
       </StyledP>
       <NavLink to={`/detail/${id}`}>
-        {" "}
         <StyledButton>View More Info</StyledButton>
       </NavLink>
     </StyledDiv>

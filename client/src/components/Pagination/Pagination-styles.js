@@ -2,7 +2,8 @@ import styled, { css } from "styled-components";
 import vars from "../styledComponents-variables";
 export const StyledButton = styled.button`
   padding: 16px;
-  background-color: ${vars.color_1};
+  background-color: ${(props) =>
+    props.number === props.currentPage ? vars.color_2 : vars.color_1};
   border-radius: 5px;
   margin: 0 10px;
   border: none;

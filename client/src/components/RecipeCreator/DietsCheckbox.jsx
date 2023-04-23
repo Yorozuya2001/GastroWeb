@@ -1,5 +1,7 @@
-import React from "react";
-import { useState } from "react";
+/* Custom hook */
+import useCheck from "../../customHooks/useCheck";
+
+/* Componentes estilizados */
 import {
   StyledCheckbox,
   StyledLabelInCheck,
@@ -7,25 +9,11 @@ import {
 } from "./RecipeCreator-styles";
 
 const DietsCheckbox = ({ name, myRecipe, setMyRecipe }) => {
-  const [isChecked, setIsChecked] = useState(false);
-  let capitalizeName = name.charAt(0).toUpperCase() + name.slice(1);
-
-  const handleCheckboxChange = (event) => {
-    setIsChecked(event.target.checked);
-
-    if (!isChecked) {
-      setMyRecipe({
-        ...myRecipe,
-        diets: [...myRecipe.diets, name],
-      });
-    } else {
-      setMyRecipe({
-        ...myRecipe,
-        diets: myRecipe.diets.filter((diet) => diet !== name),
-      });
-    }
-  };
-
+  const [capitalizeName, isChecked, handleCheckboxChange] = useCheck(
+    name,
+    myRecipe,
+    setMyRecipe
+  );
   return (
     <StyledDivContainsCheck>
       <StyledCheckbox
@@ -33,7 +21,7 @@ const DietsCheckbox = ({ name, myRecipe, setMyRecipe }) => {
         name="preferencias"
         value={name}
         checked={isChecked}
-        onChange={handleCheckboxChange}
+        onChange={(event) => handleCheckboxChange(event)}
       />
       <StyledLabelInCheck>{capitalizeName}</StyledLabelInCheck>
     </StyledDivContainsCheck>

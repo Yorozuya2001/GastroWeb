@@ -1,9 +1,14 @@
-import React from "react";
+/* Componentes estilizados */
 import { StyledButton } from "./Pagination-styles";
 
-const Pagination = ({ number, setCurrentPage, disabled }) => {
+const Pagination = ({ number, currentPage, setCurrentPage, disabled }) => {
   return (
-    <StyledButton onClick={() => setCurrentPage(number)} disabled={disabled}>
+    <StyledButton
+      currentPage={currentPage}
+      number={number}
+      onClick={() => setCurrentPage(number)} // al hacer click en el botón se seteara el current a ese número de página
+      disabled={disabled}
+    >
       {number}
     </StyledButton>
   );
