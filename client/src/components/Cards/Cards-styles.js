@@ -12,7 +12,31 @@ export const StyledDiv = styled.div`
 export const StyledPaginationContainer = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 16px 0;
+
+  ${(props) =>
+    props.tablet &&
+    css`
+      @media (max-width: 768px) {
+        flex-wrap: wrap;
+      }
+    `}
+`;
+
+export const StyledPagesContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  ${(props) =>
+    props.tablet &&
+    css`
+      @media (max-width: 768px) {
+        flex-wrap: wrap;
+        margin: 16px 0;
+      }
+    `}
 `;
 
 export const StyledButton = styled.button`

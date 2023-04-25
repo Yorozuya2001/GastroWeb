@@ -24,12 +24,14 @@ const usePagination = () => {
 
   /* Cada cambio en recipes obtenemos la cantidad de páginas que tendra nuestro páginado */
   useEffect(() => {
-    obtainPagesNumbers(recipes, setPagesNumbers, cardsPerPage);
+    Array.isArray(recipes) &&
+      obtainPagesNumbers(recipes, setPagesNumbers, cardsPerPage);
   }, [recipes]);
 
   /* Cada cambio en recipes y en currentPage obtenemos un arreglo con las cards a mostrar que se guardara en recipesViews */
   useEffect(() => {
-    obtainCardsRange(currentPage, cardsPerPage, recipes, setRecipesViews);
+    Array.isArray(recipes) &&
+      obtainCardsRange(currentPage, cardsPerPage, recipes, setRecipesViews);
   }, [currentPage, recipes]);
 
   /* Al montarse el componente si no tenemos recetas buscaremos en la API y en nuestra DB  */
@@ -48,6 +50,7 @@ const usePagination = () => {
   };
 
   return [
+    recipes,
     pagesNumbers,
     currentPage,
     setCurrentPage,

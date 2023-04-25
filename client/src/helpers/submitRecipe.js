@@ -1,5 +1,5 @@
 /* Enviamos los datos a nuestra BD */
-const handleSubmit = (event, myRecipe) => {
+const handleSubmit = (event, myRecipe, setMessage) => {
   event.preventDefault();
 
   const options = {
@@ -11,18 +11,20 @@ const handleSubmit = (event, myRecipe) => {
   };
 
   fetch("http://localhost:3001/recipes", options)
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error("Error al enviar los datos al servidor");
-      }
-    })
+    .then((response) => response.json())
     .then((responseData) => {
-      console.log("Datos enviados correctamente:", responseData);
+      if (!responseData.status) throw new Error(responseData.message);
+
+      setMessage({
+        text: responseData.message,
+        isError: false,
+      });
     })
     .catch((error) => {
-      console.error(error);
+      setMessage({
+        text: error.message,
+        isError: true,
+      });
     });
 };
 

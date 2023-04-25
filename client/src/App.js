@@ -4,6 +4,7 @@ import Home from "./components/Home/Home";
 import Nav from "./components/Nav/Nav";
 import RecipeCreator from "./components/RecipeCreator/RecipeCreator";
 import CardDetail from "./components/CardDetail/CardDetail";
+import About from "./components/About/About";
 
 function App() {
   let { pathname } = useLocation();
@@ -16,6 +17,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/recipecreator" element={<RecipeCreator />} />
         <Route path="/detail/:id" element={<CardDetail />} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </div>
   );

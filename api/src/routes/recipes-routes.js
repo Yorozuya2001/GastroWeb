@@ -14,7 +14,6 @@ const router = Router();
 /**************** RECIPES ROUTES ****************/
 
 router.get("/", async (req, res) => {
-  console.log("llega aqui");
   try {
     const data = await getRecipes();
     res.status(200).json(data);
@@ -29,7 +28,7 @@ router.get("/name", async (req, res) => {
     const data = await searchRecipeByName(search);
     res.status(200).json(data);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ error: err.message, status: false });
   }
 });
 
@@ -59,7 +58,12 @@ router.post("/", validateRecipe, async (req, res) => {
 
     await createRecipe(reqData);
 
-    res.status(200).json({ message: "Receta creada correctamente." });
+    res
+      .status(200)
+      .json({
+        message: "Your recipe has been uploaded successfully.",
+        status: "ok",
+      });
   } catch (err) {
     res.status(400).json(err);
   }

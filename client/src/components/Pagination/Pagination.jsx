@@ -1,16 +1,17 @@
 /* Componentes estilizados */
-import { StyledButton } from "./Pagination-styles";
+import { StyledButtonNumber } from "./Pagination-styles";
 
 const Pagination = ({ number, currentPage, setCurrentPage, disabled }) => {
   return (
-    <StyledButton
+    <StyledButtonNumber
+      tablet
       currentPage={currentPage}
       number={number}
       onClick={() => setCurrentPage(number)} // al hacer click en el botón se seteara el current a ese número de página
       disabled={disabled}
     >
       {number}
-    </StyledButton>
+    </StyledButtonNumber>
   );
 };
 

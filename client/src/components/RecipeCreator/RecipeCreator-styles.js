@@ -44,6 +44,22 @@ export const StyledForm = styled.form`
   padding: 16px;
   width: 50%;
   margin: 16px;
+
+  ${(props) =>
+    props.desktop &&
+    css`
+      @media (max-width: 1400px) {
+        width: 70%;
+      }
+    `}
+
+  ${(props) =>
+    props.tablet &&
+    css`
+      @media (max-width: 768px) {
+        width: 90%;
+      }
+    `}
 `;
 
 export const StyledDiv = styled.div`
@@ -99,4 +115,18 @@ export const StyledDivContainsCheck = styled.div`
 
 export const StyledP = styled.p`
   color: ${vars.color_1};
+`;
+
+export const StyledPSuccess = styled.p`
+  color: ${vars.color_2};
+  text-align: center;
+  margin: 16px 0;
+  font-size: ${vars.text_size_seccion};
+`;
+
+export const StyledPError = styled.p`
+  color: ${vars.color_1};
+  text-align: center;
+  margin: 16px 0;
+  font-size: ${vars.text_size_seccion};
 `;

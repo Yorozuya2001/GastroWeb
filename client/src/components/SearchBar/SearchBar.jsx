@@ -3,7 +3,7 @@ import { StyledDiv, StyledInput, StyledButton } from "./SearchBar-styles";
 
 const SearchBar = ({ handleChange }) => {
   return (
-    <StyledDiv>
+    <StyledDiv mobile>
       <StyledInput
         type="text"
         onChange={handleChange}

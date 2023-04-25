@@ -3,15 +3,15 @@ import { NavStyle, StyledNavLink, NavHeader } from "./Nav-styles";
 
 const Nav = () => {
   return (
-    <NavHeader phone>
-      <NavStyle>
-        <StyledNavLink to="/home" activeclassname="active">
+    <NavHeader>
+      <NavStyle mobile>
+        <StyledNavLink mobile to="/home" activeclassname="active">
           Home
         </StyledNavLink>
-        <StyledNavLink to="/recipecreator" activeclassname="active">
+        <StyledNavLink mobile to="/recipecreator" activeclassname="active">
           Create you recipe
         </StyledNavLink>
-        <StyledNavLink to="/about" activeclassname="active">
+        <StyledNavLink mobile to="/about" activeclassname="active">
           About Us
         </StyledNavLink>
       </NavStyle>

@@ -40,6 +40,15 @@ const searchRecipeByName = async (search) => {
     });
 
     let data_API = specifyResults(response_API.data.results);
+    data_API = data_API.map((recipe) => {
+      return {
+        id: recipe.id,
+        title: recipe.title,
+        image: recipe.image,
+        diets: recipe.diets.join(" - "),
+        healthScore: recipe.healthScore,
+      };
+    });
     return [...data_API, ...data_DB];
   } catch (error) {
     throw new Error(

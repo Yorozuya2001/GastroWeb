@@ -15,6 +15,8 @@ import {
   StyledDivButtonContainer,
   StyledButton,
   StyledP,
+  StyledPSuccess,
+  StyledPError,
 } from "./RecipeCreator-styles";
 
 const RecipeCreator = () => {
@@ -25,13 +27,19 @@ const RecipeCreator = () => {
     boolean,
     errors,
     setErrors,
+    message,
+    setMessage,
     handleChange,
     handleSubmit,
   ] = useRecipeCreator();
 
   return (
     <StyledDivContainerForm>
-      <StyledForm action="" onSubmit={(event) => handleSubmit(event, myRecipe)}>
+      <StyledForm
+        desktop
+        tablet
+        onSubmit={(event) => handleSubmit(event, myRecipe, setMessage)}
+      >
         <StyledDiv>
           <StyledLabel
             htmlFor="name"
@@ -131,6 +139,11 @@ const RecipeCreator = () => {
             Create recipe
           </StyledButton>
         </StyledDivButtonContainer>
+        {message.text && !message.isError ? (
+          <StyledPSuccess>{message.text}</StyledPSuccess>
+        ) : (
+          <StyledPError>{message.text}</StyledPError>
+        )}
       </StyledForm>
     </StyledDivContainerForm>
   );

@@ -1,10 +1,17 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import vars from "../styledComponents-variables";
 
 export const StyledDiv = styled.div`
   display: flex;
   justify-content: center;
-  padding-top: 16px;
+  margin: 32px 0 16px 0;
+  ${(props) =>
+    props.mobile &&
+    css`
+      @media (max-width: 968px) {
+        margin: 16px 16px;
+      }
+    `}
 `;
 
 export const StyledInput = styled.input`

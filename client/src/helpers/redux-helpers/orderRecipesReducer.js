@@ -1,4 +1,10 @@
 export const orderRecipesReducer = (state, action) => {
+  if (!Array.isArray(state.recipes))
+    return {
+      ...state,
+      recipes: "Cant not order because there aren't recipes",
+    };
+
   if (action.payload === "a-z") {
     return {
       ...state,

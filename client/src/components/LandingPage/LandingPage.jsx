@@ -7,7 +7,7 @@ import { StyledButton, StyledH1, StyledDiv } from "./LandingPage.-styles";
 const LandingPage = () => {
   return (
     <StyledDiv>
-      <StyledH1>Welcome to GastroWeb</StyledH1>
+      <StyledH1 tablet>Welcome to GastroWeb</StyledH1>
       <NavLink to="/home">
         <StyledButton>Start looking for recipes</StyledButton>
       </NavLink>

@@ -10,8 +10,8 @@ import {
   filterByDiets,
   orderBy,
   searchRecipes,
+  getDiets,
 } from "../redux/actions";
-import { getDiets } from "../redux/actions";
 
 const useOptions = () => {
   /* Variable de estado donde guardaremos lo que se ingresa por input */

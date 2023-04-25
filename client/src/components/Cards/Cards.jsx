@@ -9,10 +9,13 @@ import {
   StyledButton,
   StyledDiv,
   StyledPaginationContainer,
+  StyledPagesContainer,
 } from "./Cards-styles";
+import NotFound from "../NotFound/NotFound";
 
 const Cards = () => {
   const [
+    recipes,
     pageNumbers,
     currentPage,
     setCurrentPage,
@@ -22,8 +25,34 @@ const Cards = () => {
   ] = usePagination();
   return (
     <>
+      <StyledDiv>
+        {
+          /* Renderizamos las recetas que se veran dependiendo el número de página, si no hay recetas usamos un loader hasta que carguen */
+
+          Array.isArray(recipes) ? (
+            recipesViews[0] ? (
+              recipesViews.map(({ id, title, image, diets, healthScore }) => {
+                return (
+                  <Card
+                    key={id}
+                    id={id}
+                    title={title}
+                    image={image}
+                    diets={diets}
+                    healthScore={healthScore}
+                  />
+                );
+              })
+            ) : (
+              <Loader />
+            )
+          ) : (
+            <NotFound message={recipes} />
+          )
+        }
+      </StyledDiv>
       {/*--------------- Sección de paginación --------------- */}
-      <StyledPaginationContainer>
+      <StyledPaginationContainer tablet>
         <StyledButton
           onClick={handlePrev}
           disabled={
@@ -33,7 +62,7 @@ const Cards = () => {
         >
           Prev
         </StyledButton>
-        <div>
+        <StyledPagesContainer tablet>
           {
             /* Renderizamos los botones con números para navegar */
             pageNumbers[0] &&
@@ -47,7 +76,7 @@ const Cards = () => {
                 />
               ))
           }
-        </div>
+        </StyledPagesContainer>
         <StyledButton
           onClick={handleNext}
           disabled={
@@ -60,27 +89,6 @@ const Cards = () => {
           Next
         </StyledButton>
       </StyledPaginationContainer>
-      <StyledDiv>
-        {
-          /* Renderizamos las recetas que se veran dependiendo el número de página, si no hay recetas usamos un loader hasta que carguen */
-          recipesViews[0] ? (
-            recipesViews.map(({ id, title, image, diets, healthScore }) => {
-              return (
-                <Card
-                  key={id}
-                  id={id}
-                  title={title}
-                  image={image}
-                  diets={diets}
-                  healthScore={healthScore}
-                />
-              );
-            })
-          ) : (
-            <Loader />
-          )
-        }
-      </StyledDiv>
     </>
   );
 };

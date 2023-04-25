@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import vars from "../styledComponents-variables";
 
 export const StyledDiv = styled.div`
@@ -13,6 +13,17 @@ export const StyledDiv = styled.div`
 export const StyledH1 = styled.h1`
   font-size: ${vars.text_size_h1};
   margin-bottom: 48px;
+
+  ${(props) =>
+    props.tablet &&
+    css`
+      @media (max-width: 768px) {
+        font-size: ${vars.text_size_h1_mobile};
+        text-align: center;
+        margin: 0 16px;
+        margin-bottom: 32px;
+      }
+    `}
 `;
 
 export const StyledButton = styled.button`

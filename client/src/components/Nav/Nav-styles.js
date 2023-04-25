@@ -11,15 +11,6 @@ export const NavHeader = styled.header`
   background-color: ${vars.color_1};
   font-size: ${vars.text_size_seccion};
   width: 100%;
-  ${(props) =>
-    props.phone &&
-    css`
-      @media (max-width: 576px) {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-    `}
 `;
 
 export const NavStyle = styled.nav`
@@ -27,6 +18,16 @@ export const NavStyle = styled.nav`
   justify-content: center;
   align-items: center;
   padding: 24px 0;
+  ${(props) =>
+    props.mobile &&
+    css`
+      @media (max-width: 576px) {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 0;
+      }
+    `}
 `;
 
 export const StyledNavLink = styled(NavLink)`
@@ -42,6 +43,15 @@ export const StyledNavLink = styled(NavLink)`
     color: ${vars.color_4};
     text-decoration: underline;
   }
+
+  ${(props) =>
+    props.mobile &&
+    css`
+      @media (max-width: 576px) {
+        font-size: ${vars.text_size_seccion_mobile};
+        padding: 6px 0;
+      }
+    `}
 `;
 
 export const StyledDiv = styled.div`

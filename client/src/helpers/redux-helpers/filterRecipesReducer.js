@@ -6,14 +6,18 @@ export const filterRecipesReducer = (state, action) => {
   if (action.payload === "all") {
     return {
       ...state,
-      recipes: [...state.allRecipes],
+      recipes: state.allRecipes[0]
+        ? [...state.allRecipes]
+        : "not found Recipes",
       recipesFiltered: [...state.allRecipes],
     };
   }
   if (action.payload === "db-recipes") {
     return {
       ...state,
-      recipes: [...recipesFilteredById],
+      recipes: recipesFilteredById[0]
+        ? [...recipesFilteredById]
+        : "Recipes not found in DB",
       recipesFiltered: [...recipesFilteredById],
     };
   }
